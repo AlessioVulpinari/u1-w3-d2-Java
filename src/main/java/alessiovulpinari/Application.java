@@ -3,6 +3,7 @@ package alessiovulpinari;
 import alessiovulpinari.dao.EventoDao;
 import alessiovulpinari.entities.EventType;
 import alessiovulpinari.entities.Evento;
+import alessiovulpinari.exceptions.NonFoundException;
 import com.github.javafaker.Faker;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -27,11 +28,20 @@ public class Application {
 //            eventoDao.save(evento);
 //        }
 
-//        eventoDao.deleteEventById(121L);
 
-        Evento searchEvent = eventoDao.getEventById(120L);
+        try {
+            eventoDao.deleteEventById(121L);
+        } catch (NonFoundException exception) {
+            System.out.println(exception.getMessage());
+        }
+        
+        try {
+            Evento searchEvent = eventoDao.getEventById(120L);
+            System.out.println(searchEvent);
+        } catch (NonFoundException exception) {
+            System.out.println(exception.getMessage());
+        }
 
-        System.out.println(searchEvent);
     }
 
     public static Evento CreateEvent() {
