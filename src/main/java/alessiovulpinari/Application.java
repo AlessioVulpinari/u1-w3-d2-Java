@@ -34,7 +34,7 @@ public class Application {
         } catch (NonFoundException exception) {
             System.out.println(exception.getMessage());
         }
-        
+
         try {
             Evento searchEvent = eventoDao.getEventById(120L);
             System.out.println(searchEvent);
@@ -42,6 +42,8 @@ public class Application {
             System.out.println(exception.getMessage());
         }
 
+        entityManager.close();
+        entityManagerFactory.close();
     }
 
     public static Evento CreateEvent() {
